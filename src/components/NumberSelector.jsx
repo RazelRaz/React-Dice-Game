@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { styled } from "styled-components";
 
 
@@ -5,20 +6,42 @@ const NumberSelector = () => {
 
     const arrayNumbers = [1,2,3,4,5,6]
     // a state for selecting a number
-
+    const [selectedNumber, setSelectedNumber] = useState()
 
     return (
-        <div>
-            {
-                arrayNumbers.map((value, key) => {
-                   return <Box key={key}>{value}</Box>
-                })
-            }
-        </div>
+        <NumberSelectorContainer>
+            <div className="flex">
+                {
+                    arrayNumbers.map((value, key) => {
+                    return <Box isSelected={value == selectedNumber} key={key} onClick={() => setSelectedNumber(value)}>{value}</Box>
+                    })
+                }
+            </div>
+            <p>Select Number</p>
+        </NumberSelectorContainer>
     );
 };
 
 export default NumberSelector;
+
+const NumberSelectorContainer = styled.div`
+
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+
+    .flex {
+        display: flex;
+        gap: 24px;
+
+    }
+    p {
+        color: #000;
+        font-family: Poppins;
+        font-size: 24px;
+        font-weight: 700;
+    }
+`;
 
 const Box = styled.div`
     display: flex;
@@ -31,6 +54,8 @@ const Box = styled.div`
     background: #FFF;
     font-size: 24px;
     font-weight: 700;
+    background-color: ${(props) => (props.isSelected ? 'black' : 'white')};
+    color: ${(props) => (!props.isSelected ? 'black' : 'white')};
 `
 
 
