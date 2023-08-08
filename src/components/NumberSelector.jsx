@@ -1,19 +1,18 @@
-import { useState } from "react";
 import { styled } from "styled-components";
 
 
-const NumberSelector = () => {
+const NumberSelector = ({selectedNumber, setSelectedNumber}) => {
 
     const arrayNumbers = [1,2,3,4,5,6]
     // a state for selecting a number
-    const [selectedNumber, setSelectedNumber] = useState()
+    
 
     return (
         <NumberSelectorContainer>
             <div className="flex">
                 {
                     arrayNumbers.map((value, key) => {
-                    return <Box isSelected={value == selectedNumber} key={key} onClick={() => setSelectedNumber(value)}>{value}</Box>
+                    return <Box isSelected={value === selectedNumber} key={key} onClick={() => setSelectedNumber(value)}>{value}</Box>
                     })
                 }
             </div>
@@ -43,7 +42,13 @@ const NumberSelectorContainer = styled.div`
     }
 `;
 
-const Box = styled.div`
+
+
+
+
+const Box = styled.div.withConfig({
+    shouldForwardProp: (prop) => !['isSelected'].includes(prop),
+  })`
     display: flex;
     width: 72px;
     height: 72px;
@@ -56,6 +61,4 @@ const Box = styled.div`
     font-weight: 700;
     background-color: ${(props) => (props.isSelected ? 'black' : 'white')};
     color: ${(props) => (!props.isSelected ? 'black' : 'white')};
-`
-
-
+  `;
