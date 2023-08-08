@@ -1,18 +1,9 @@
 import { styled } from "styled-components";
-import { useState } from "react";
 
-const RollDice = ({currentDice, setCurrentDice}) => {
 
-    const generateRandomNumber = (min, max) => {
-        console.log(Math.floor(Math.random() * (max - min) + min));
-        return Math.floor(Math.random() * (max - min) + min);  
-    }
+const RollDice = ({currentDice, rollDice}) => {
 
-    //same dice image show when the number is same
-    const rollDice = () => {
-      const rendomNumber = generateRandomNumber(1, 7)
-      setCurrentDice((prev) => rendomNumber);
-    }
+    
 
     return (
         <DiceContainer>
