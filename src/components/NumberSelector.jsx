@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
 
-const NumberSelector = ({selectedNumber, setSelectedNumber}) => {
+const NumberSelector = ({selectedNumber, setSelectedNumber, error}) => {
 
     const arrayNumbers = [1,2,3,4,5,6]
     // a state for selecting a number
@@ -9,6 +9,7 @@ const NumberSelector = ({selectedNumber, setSelectedNumber}) => {
 
     return (
         <NumberSelectorContainer>
+            <p>{error}</p>
             <div className="flex">
                 {
                     arrayNumbers.map((value, key) => {

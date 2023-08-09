@@ -11,6 +11,7 @@ const GamePlay = () => {
 
     const [selectedNumber, setSelectedNumber] = useState()
     const [currentDice, setCurrentDice] = useState(1)
+    const [error, setError] = useState("")
 
 
     const generateRandomNumber = (min, max) => {
@@ -19,7 +20,14 @@ const GamePlay = () => {
     }
 
     //same dice image show when the number is same
-    const rollDice = () => {                 
+    const rollDice = () => { 
+    
+      if(!selectedNumber) {
+        setError("You have not selected any number!")
+        return
+      }
+      setError("")  
+
       const rendomNumber = generateRandomNumber(1, 7)
       setCurrentDice((prev) => rendomNumber);
 
@@ -37,7 +45,7 @@ const GamePlay = () => {
         <MainContainer>
             <div className="top_section">
                 <TotalScore score={score}></TotalScore>
-                <NumberSelector selectedNumber={selectedNumber} setSelectedNumber={setSelectedNumber}></NumberSelector>
+                <NumberSelector selectedNumber={selectedNumber} setSelectedNumber={setSelectedNumber} error={error}></NumberSelector>
             </div>
             <RollDice currentDice={currentDice} rollDice={rollDice}></RollDice>
         </MainContainer>
